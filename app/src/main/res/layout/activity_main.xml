@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@drawable/gradation"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/first_line"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+        <!-- 좋아할만한 최신 앨범 목록 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:src="@drawable/Help"
+                        app:riv_corner_radius="10dp"
+                    />
+                </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/newest_first_album_title"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/newest_first_album_singer" />
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/rounded_background"
+            >
+
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/second_line"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+
+        <!-- 오늘의 발매 음악 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:src="@drawable/callfromdream"
+                        app:riv_corner_radius="10dp"
+
+                    />
+                </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today_first_album_title"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/newest_first_album_singer" />
+
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/third_line"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+        <!-- 낮에 듣기 좋은 음악 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:src="@drawable/emotions"
+                        app:riv_corner_radius="10dp"
+
+                        />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pop_song"/>
+
+
+
+                </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/forth_line"
+            android:textColor="#000000"
+            android:textSize="25dp"/>
+
+        <!-- 낮에 듣기 좋은 음악 -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true"
+                        app:cardBackgroundColor="#418868">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="360dp"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+
+                        >
+                        <TextView
+                            android:layout_margin="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:text="RoundedImageView + CardView 예제" />
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/imageview_main_image2"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitEnd"
+                            app:riv_corner_radius_bottom_right="10dp"
+                            app:riv_corner_radius_top_right="10dp"
+                            android:src="@drawable/emotions"
+                            app:riv_border_color="#333333"
+                            app:riv_mutate_background="true"
+                            app:riv_oval="false" />
+
+
+                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardUseCompatPadding="true"
+                        app:cardBackgroundColor="#C82159">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="360dp"
+                            android:layout_height="wrap_content"
+                            android:weightSum="2"
+
+                            >
+                            <TextView
+                                android:layout_margin="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="80dp"
+                                android:layout_weight="1"
+                                android:text="RoundedImageView + CardView 예제" />
+
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:id="@+id/imageview_main_image3"
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp"
+                                android:layout_weight="1"
+                                android:scaleType="fitEnd"
+                                app:riv_corner_radius_bottom_right="10dp"
+                                app:riv_corner_radius_top_right="10dp"
+                                android:src="@drawable/emotions"
+                                app:riv_border_color="#333333"
+                                app:riv_mutate_background="true"
+                                app:riv_oval="false" />
+
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+</ScrollView>
