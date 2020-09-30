@@ -14,9 +14,9 @@ class AlbumCustomView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttributes: Int = 0
 ): LinearLayout(context, attrs, defStyleAttributes){
 
-    private lateinit var src: RoundedImageView
-    private lateinit var title: TextView
-    private lateinit var singer: TextView
+    private lateinit var mroundedimageview: RoundedImageView
+    private lateinit var mtitletext: TextView
+    private lateinit var msingertext: TextView
 
     init {
         //LayoutInflater.from(context).inflate(R.layout.customview_album, this, false)
@@ -24,10 +24,13 @@ class AlbumCustomView @JvmOverloads constructor(
         val view = inflater.inflate(R.layout.customview_album, this, false)
         addView(view)
 
-        src = view.image
-        title = view.title
-        singer = view.singer
+        mroundedimageview = view.roundedimageiew
+        mtitletext = view.titletext
+        msingertext = view.singertext
+        getAttrs(attrs, defStyleAttributes)
     }
+
+
     @SuppressLint("Recycle")
     private fun getAttrs(attrs: AttributeSet?) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.AlbumCustomView)
@@ -40,29 +43,29 @@ class AlbumCustomView @JvmOverloads constructor(
     }
 
     private fun setTypeArray(typedArray: TypedArray){
-        src.setImageResource(typedArray.getResourceId(R.styleable.AlbumCustomView_src,R.drawable.help))
-        title.text = typedArray.getString(R.styleable.AlbumCustomView_title)
-        singer.text = typedArray.getString(R.styleable.AlbumCustomView_singer)
+        mroundedimageview.setImageResource(typedArray.getResourceId(R.styleable.AlbumCustomView_srcimage,R.drawable.help))
+        mtitletext.text = typedArray.getString(R.styleable.AlbumCustomView_title)
+        msingertext.text = typedArray.getString(R.styleable.AlbumCustomView_singer)
     }
 
     fun settitletext(text: String){
-        title.text = text
+        mtitletext.text = text
     }
 
     fun settitletext(text_resID: Int){
-        title.text = context.getString(text_resID)
+        mtitletext.text = context.getString(text_resID)
     }
 
     fun setsingertext(text:String){
-        singer.text = text
+        msingertext.text = text
     }
 
     fun setsingertext(text_resID: Int){
-        singer.text = context.getString(text_resID)
+        msingertext.text = context.getString(text_resID)
     }
 
     fun setsrcimage(image_resID: Int){
-        src.setImageResource((image_resID))
+        mroundedimageview.setImageResource((image_resID))
     }
 
 }

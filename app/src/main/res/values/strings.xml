@@ -5,8 +5,9 @@
     <string name="newest_first_album_singer">"혁오 &amp; 이디오테잎"</string>
     <string name="second_line">오늘 발매 음악  ></string>
     <string name="today_first_album_title">꿈에서 걸려온 전화</string>
-    <string name="today_second_album_singer">김뜻돌</string>
+    <string name="today_first_album_singer">김뜻돌</string>
     <string name="third_line">낮에 듣기 좋은 음악</string>
     <string name="pop_song">지금 들어도 신나는 8090 팝송</string>
     <string name="forth_line">나를 위한 새로운 발견</string>
+    <string name="fifth_line">좋아할만한 아티스트 MIX</string>
 </resources>
