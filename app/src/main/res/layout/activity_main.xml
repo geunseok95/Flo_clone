@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,13 +28,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/first_line"
-                android:textColor="#000000"
-                android:textSize="25dp"/>
+                style="@style/subtitle_style"
+                />
 
             <!-- 좋아할만한 최신 앨범 목록 -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -46,6 +48,20 @@
                         app:srcimage="@drawable/help"
                         app:title="@string/newest_first_album_title"
                         app:singer="@string/newest_first_album_singer"/>
+
+                    <com.professionalandroid.apps.flo.AlbumCustomView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:srcimage="@drawable/tint"
+                        app:title="@string/newest_second_album_title"
+                        app:singer="@string/newest_second_album_singer"/>
+
+                    <com.professionalandroid.apps.flo.AlbumCustomView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:srcimage="@drawable/fourfive"
+                        app:title="@string/newest_third_album_title"
+                        app:singer="@string/newest_third_album_singer"/>
 
 
                 </LinearLayout>
@@ -63,8 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/second_line"
-                android:textColor="#000000"
-                android:textSize="25dp"/>
+                style="@style/subtitle_style"/>
 
 
             <!-- 오늘의 발매 음악 -->
@@ -72,7 +87,8 @@
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scrollbars="none" >
 
 
                 <LinearLayout
@@ -96,13 +112,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/third_line"
-                android:textColor="#000000"
-                android:textSize="25dp"/>
+                style="@style/subtitle_style"/>
 
             <!-- 낮에 듣기 좋은 음악 -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -122,13 +138,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/forth_line"
-                android:textColor="#000000"
-                android:textSize="25dp"/>
+                style="@style/subtitle_style"/>
 
             <!-- 낮에 듣기 좋은 음악 -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scrollbars="none" >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -234,8 +250,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fifth_line"
-                android:textSize="25dp"
-                android:textColor="#000000"/>
+                style="@style/subtitle_style"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"

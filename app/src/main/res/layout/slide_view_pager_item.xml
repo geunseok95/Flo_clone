@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="410dp"
+    android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradation"
     android:paddingStart="20dp"
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="오늘의 추천"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:layout_marginTop="50dp" />
@@ -22,21 +22,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="많이 들은 곡과\n비슷한 음악"
-        android:textSize="32sp"
+        android:textSize="28sp"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:layout_marginTop="90dp"/>
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/circle"
         android:layout_gravity="end"
         android:layout_marginTop="90dp"/>
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/ic_launcher_flo_play_foreground"
         android:backgroundTint="#D86EB0"
         android:layout_gravity="end"
@@ -45,10 +45,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="총 30곡"
-        android:textSize="15sp"
+        android:text="총 30곡 2020.09.25"
+        android:textSize="12sp"
         android:textColor="#ffffff"
-        android:layout_gravity="start|center_vertical"/>
+        android:layout_gravity="start|center_vertical"
+        android:paddingTop="20dp"/>
 
     <TextView
         android:id="@+id/viewpager_image1_title"
@@ -61,28 +62,30 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/viewpager_image2"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:src="@drawable/farewell"
         app:riv_corner_radius="10dp"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"/>
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/viewpager_image3"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:src="@drawable/jooho"
         app:riv_corner_radius="10dp"
         android:layout_gravity="end|bottom"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="20dp"/>
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/viewpager_image1"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:src="@drawable/thestray"
         app:riv_corner_radius="10dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="25dp"/>
 </FrameLayout>

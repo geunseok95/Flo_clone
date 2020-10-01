@@ -31,4 +31,8 @@ class SlideViewPagerAdapter(private val list: ArrayList<album_list>):PagerAdapte
         return list.size
     }
 
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View?)
+    }
+
 }
