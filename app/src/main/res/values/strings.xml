@@ -15,7 +15,10 @@
     <string name="today_third_album_title">im your xYz</string>
     <string name="today_third_album_singer">용용 (Yong Yong)</string>
     <string name="third_line">낮에 듣기 좋은 음악</string>
-    <string name="pop_song">지금 들어도 신나는 8090 팝송</string>
+    <string name="noon_first_album">"지금 들어도 신나는\n8090 팝송"</string>
+    <string name="noon_second_album">휴식엔 따뜻한 알앤비\n음악</string>
     <string name="forth_line">나를 위한 새로운 발견</string>
     <string name="fifth_line">좋아할만한 아티스트 MIX</string>
+    <string name="pop">"해외 팝\n추천 음악\n\n\n09.28"</string>
+    <string name="electronic">"해외 일렉트로닉\n추천 음악\n\n\n09.28"</string>
 </resources>

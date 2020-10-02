@@ -41,7 +41,8 @@ class MyService : Service() {
     }
 
     val musiclist = arrayOf(R.raw.gilgubonggu_propose, R.raw.bts_dynamite, R.raw.cash_cash_how_to_love_feat_sofia_reyes)
-
+    val titlelist = arrayOf("프로포즈", "Dynamite", "How To Love (feat. Sofia Reyes)")
+    val artistlist = arrayOf("길구봉구", "방탄소년단", "Cash Cash")
 
     override fun onCreate() {
         super.onCreate()
@@ -64,9 +65,6 @@ class MyService : Service() {
         }
         return START_NOT_STICKY
     }
-
-
-
 
 
 //        val message = intent?.extras?.getBoolean(MESSAGE_KEY)

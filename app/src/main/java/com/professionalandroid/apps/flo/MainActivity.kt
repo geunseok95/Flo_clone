@@ -19,7 +19,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var myService: MyService
     private var mBound: Boolean = false
     private var isPlaying:Boolean = false
+    private var saved_play_music = 0.toString()
+    private var saved_play_music_int = 0
 
+
+    // Bind Service 설정
     private val connection = object : ServiceConnection{
         override fun onServiceDisconnected(p0: ComponentName?) {
             mBound = false
@@ -36,7 +40,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     // seek Bar가 움직일 Thread
     inner class MyThread: Thread() {
         override fun run() {
@@ -46,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 //
 //    class AudioDataViewModel : ViewModel() {
@@ -107,8 +109,11 @@ class MainActivity : AppCompatActivity() {
         intentfilter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
         registerReceiver(mMediaReceiver, intentfilter)
 
+        saved_play_music = getSharedPreferences("test", Context.MODE_PRIVATE).getString("inputText","0")!!
+        saved_play_music_int = saved_play_music.toInt()
 
-
+        Log.d("test", saved_play_music)
+        Log.d("test", "$saved_play_music_int")
 
         // 플레이버튼.
         Log.d("test", "create")
@@ -127,6 +132,11 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+        // 동기...?
+//        myService.now_song = saved_play_music_int
+//        now_title.text = myService.titlelist[myService.now_song]
+//        now_singer.text = myService.artistlist[myService.now_song]
+
         // 버튼 클릭시 음악 재생, 일시정지
         play.setOnClickListener {
             it.isSelected = !it.isSelected
@@ -136,13 +146,11 @@ class MainActivity : AppCompatActivity() {
                 myService.musicRestart()
                 isPlaying = true
                 val thread = MyThread()
-
                 thread.start()
-
             }
-                else{
-                    myService.musicPause()
-                    isPlaying = false
+            else{
+                myService.musicPause()
+                isPlaying = false
             }
         }
 
@@ -150,6 +158,10 @@ class MainActivity : AppCompatActivity() {
         next.setOnClickListener {
             myService.musicNext()
             if(!play.isSelected) play.isSelected = true
+            // 진행중인 음악 제목 가수 변경
+            now_title.text = myService.titlelist[myService.now_song]
+            now_singer.text = myService.artistlist[myService.now_song]
+            //스레드 유지
             isPlaying = true
             Log.d("test", "music ${myService.musiclist[myService.now_song]}")
 
@@ -159,6 +171,10 @@ class MainActivity : AppCompatActivity() {
         previous.setOnClickListener {
             myService.musicPrevious()
             if(!play.isSelected) play.isSelected = true
+            // 진행중인 음악 제목 가수 변경
+            now_title.text = myService.titlelist[myService.now_song]
+            now_singer.text = myService.artistlist[myService.now_song]
+            //스레드 유지
             isPlaying = true
         }
         Log.d("test", "resume")
@@ -173,7 +189,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-
+        // 서비스 해제
         unbindService(connection)
         mBound = false
         Log.d("test", "stop")
@@ -181,6 +197,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        // sharedPreferences를 이용한 데이터 저장
+        val sharedPreferences = getSharedPreferences("test", Context.MODE_PRIVATE) // test 이름의 기본모드 설정
+        val editor = sharedPreferences.edit() //sharedPreferences를 제어할 editor를 선언
+        editor.putString("inputText", myService.now_song.toString()) // key,value 형식으로 저장
+        editor.apply() //최종 커밋. 커밋을 해야 저장이 된다.
+
         // BroadcastReceiver 해제
         unregisterReceiver(mMediaReceiver)
         Log.d("test", "destroy")
