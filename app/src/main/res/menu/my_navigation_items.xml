@@ -9,7 +9,7 @@
         android:enabled="true" />
     <item
         android:id="@+id/navigation_bar_look_around"
-        android:icon="@mipmap/ic_launcher_flo_store"
+        android:icon="@drawable/ic_launcher_flo_store_foreground"
         android:enabled="true"
         android:title="둘러보기" />
     <item

@@ -1,14 +1,13 @@
 package com.professionalandroid.apps.flo
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.media.AudioManager
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +16,47 @@ class MainActivity : AppCompatActivity() {
         const val TAG_LIST_FRAGMENT = "TAG_LIST_FRAGMENT"
     }
 
+    lateinit var myService: MyService
+    private var mBound: Boolean = false
+    private var isPlaying:Boolean = false
+
+    private val connection = object : ServiceConnection{
+        override fun onServiceDisconnected(p0: ComponentName?) {
+            mBound = false
+        }
+
+        override fun onServiceConnected(classname: ComponentName?, service: IBinder?) {
+            val binder = service as MyService.LocalBinder
+            myService = binder.getService()
+            mBound = true
+            myService.mMediaPlayer?.let {
+
+            }
+        }
+
+    }
+
+
+    // seek Bar가 움직일 Thread
+    inner class MyThread: Thread() {
+        override fun run() {
+            while(isPlaying){
+                seekBar.max = myService.mMediaPlayer!!.duration
+                seekBar.progress = myService.mMediaPlayer!!.currentPosition
+            }
+        }
+    }
+
+
+//
+//    class AudioDataViewModel : ViewModel() {
+//        // String 타입의 MutableLiveData 생성, by lazy로 초기화는 뒤에
+//        val textValue: MutableLiveData<Album> by lazy {
+//            MutableLiveData<Album>()
+//        }
+//    }
+
+    // 리시버 정의
     private val mMediaReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if(intent.action == AudioManager.ACTION_AUDIO_BECOMING_NOISY){
@@ -30,13 +70,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+//    private lateinit var model: AudioDataViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        // 로컬 DB에 대한 권한 체크와 요청
+//        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
+//        }
+//
+//        lateinit var now_music:Album
+//        // view모델 가져오기
+//        model = ViewModelProvider(this).get(AudioDataViewModel::class.java)
+//        val testObserver = Observer<Album>{ album_value ->
+//            now_music = album_value
+//        }
+//        model.textValue.observe(this, testObserver)
 
+        // fragment 연결
         var mslideviewpager:SlideViewPager? = null
-
         val fm = supportFragmentManager
 
         if(savedInstanceState == null){
@@ -54,6 +108,8 @@ class MainActivity : AppCompatActivity() {
         registerReceiver(mMediaReceiver, intentfilter)
 
 
+
+
         // 플레이버튼.
         Log.d("test", "create")
 
@@ -61,13 +117,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        // 서비스 연결
+        Intent(this,MyService::class.java).also{
+            intent -> bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        }
         Log.d("test", "start")
     }
 
     override fun onResume() {
         super.onResume()
-
-        val intent = Intent(this, MyService::class.java)
 
         // 버튼 클릭시 음악 재생, 일시정지
         play.setOnClickListener {
@@ -75,14 +133,34 @@ class MainActivity : AppCompatActivity() {
             Log.d("test", "button")
 
             if(it.isSelected){
-                intent.putExtra(MESSAGE_KEY, true)
-        }
-            else{
-                intent.putExtra(MESSAGE_KEY, false)
+                myService.musicRestart()
+                isPlaying = true
+                val thread = MyThread()
+
+                thread.start()
+
             }
-            startService(intent)
+                else{
+                    myService.musicPause()
+                    isPlaying = false
+            }
         }
 
+        // 다음 곡
+        next.setOnClickListener {
+            myService.musicNext()
+            if(!play.isSelected) play.isSelected = true
+            isPlaying = true
+            Log.d("test", "music ${myService.musiclist[myService.now_song]}")
+
+        }
+
+        // 이전 곡
+        previous.setOnClickListener {
+            myService.musicPrevious()
+            if(!play.isSelected) play.isSelected = true
+            isPlaying = true
+        }
         Log.d("test", "resume")
     }
 
@@ -95,6 +173,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+
+        unbindService(connection)
+        mBound = false
         Log.d("test", "stop")
     }
 
@@ -109,4 +190,22 @@ class MainActivity : AppCompatActivity() {
         super.onRestart()
         Log.d("test", "restart")
     }
+
+
+    // 권한 획득 확인
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//
+//        }
+//    }
+//
+//    fun getAudioListFromMediaDatabase(){
+//
+//    }
+
 }

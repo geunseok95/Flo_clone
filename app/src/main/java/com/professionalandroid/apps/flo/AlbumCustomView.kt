@@ -14,9 +14,9 @@ class AlbumCustomView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttributes: Int = 0
 ): LinearLayout(context, attrs, defStyleAttributes){
 
-    private lateinit var mroundedimageview: RoundedImageView
-    private lateinit var mtitletext: TextView
-    private lateinit var msingertext: TextView
+    private var mroundedimageview: RoundedImageView
+    private var mtitletext: TextView
+    private var msingertext: TextView
 
     init {
         //LayoutInflater.from(context).inflate(R.layout.customview_album, this, false)
