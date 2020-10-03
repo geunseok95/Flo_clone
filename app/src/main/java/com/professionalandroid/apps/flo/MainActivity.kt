@@ -126,6 +126,10 @@ class MainActivity : AppCompatActivity() {
         Intent(this,MyService::class.java).also{
             intent -> bindService(intent, connection, Context.BIND_AUTO_CREATE)
         }
+
+        // isPlaying = true
+        val thread = MyThread()
+        thread.start()
         Log.d("test", "start")
     }
 
@@ -192,6 +196,7 @@ class MainActivity : AppCompatActivity() {
         // 서비스 해제
         unbindService(connection)
         mBound = false
+        isPlaying = false
         Log.d("test", "stop")
     }
 
