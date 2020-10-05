@@ -1,10 +1,13 @@
 package com.professionalandroid.apps.flo
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_music__play_list.*
@@ -33,6 +36,8 @@ class Music_PlayList : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
     }
 
     override fun onCreateView(
@@ -43,9 +48,13 @@ class Music_PlayList : Fragment() {
         val view = inflater.inflate(R.layout.fragment_music__play_list, container, false)
         mRecyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
 
-//        back_btn.setOnClickListener {
-//            (activity as MainActivity).closeFragment(this)
-//        }
+        val back_btn = view.findViewById<ImageView>(R.id.back_btn)
+
+        back_btn.setOnClickListener {
+            (activity as MainActivity).closeFragment(this)
+
+            Log.d("test", "back_btn")
+        }
 
         return view
     }

@@ -121,8 +121,8 @@ import kotlinx.android.synthetic.main.activity_main.*
         val musicmanager = supportFragmentManager
         val musicplaylist = Music_PlayList()
         playlist.setOnClickListener {
-            Log.d("test", "playlist")
-            musicmanager.beginTransaction().addToBackStack("list")
+            // stack에 music_list 추가
+            musicmanager.beginTransaction().addToBackStack("music_list")
             musicmanager.beginTransaction().replace(R.id.main_layout, musicplaylist).commitAllowingStateLoss()
 
 
@@ -137,8 +137,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 //                else    break
 //            }
         }
-
-
 
         // 플레이버튼.
         Log.d("test", "create")
@@ -243,13 +241,14 @@ import kotlinx.android.synthetic.main.activity_main.*
         Log.d("test", "restart")
     }
 
-
+    // fragment에서 activity로 복귀
     fun closeFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(fragment)
         transaction.commit()
 
         val manager = supportFragmentManager
+        //stack에서 제거
         manager.popBackStack()
     }
 
