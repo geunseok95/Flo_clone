@@ -21,4 +21,6 @@
     <string name="fifth_line">좋아할만한 아티스트 MIX</string>
     <string name="pop">"해외 팝\n추천 음악\n\n\n09.28"</string>
     <string name="electronic">"해외 일렉트로닉\n추천 음악\n\n\n09.28"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="#000000"
+    android:padding="10dp"
+    android:weightSum="7">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/recycler_view_image"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:riv_corner_radius="10dp"
+        android:src="@drawable/thestray"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="5"
+        android:paddingStart="5dp">
+        <TextView
+            android:id="@+id/recycler_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="너, 너 (Piano Ver.)"
+            android:textColor="#ffffff"/>
+
+        <TextView
+            android:id="@+id/recycler_view_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스트레이 (The Stray)"
+            android:textColor="#80ffffff"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/ic_baseline_more_vert_24"/>
+
+</LinearLayout>

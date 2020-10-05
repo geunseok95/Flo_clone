@@ -1,15 +1,11 @@
 package com.professionalandroid.apps.flo
 
-import android.R.raw
 import android.app.Service
 import android.content.Intent
 import android.media.MediaPlayer
-import android.media.MediaPlayer.OnCompletionListener
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
-import com.professionalandroid.apps.flo.MainActivity.Companion.MESSAGE_KEY
-import kotlin.Unit as Unit1
 
 
 class MyService : Service() {
@@ -17,7 +13,6 @@ class MyService : Service() {
     var mMediaPlayer: MediaPlayer? = null
     private var pauseposition = 0
     var now_song = 0
-
 
 //    val music_list = fun(): List<Int>? {
 //        val temp= mutableListOf<Int>()
@@ -51,21 +46,19 @@ class MyService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d("test", "service start")
 
-    if(mMediaPlayer == null) {
-        intent?.let {
+        if(mMediaPlayer == null) {
+            intent?.let {
                 mMediaPlayer?.let { it ->
                     it.setOnCompletionListener { _ -> stopSelf() }
                     it.seekTo(pauseposition)
                     it.start()
-                    Log.d("test", "$pauseposition")
-                    Log.d("test", "service start")
                 }
             }
         }
         return START_NOT_STICKY
     }
-
 
 //        val message = intent?.extras?.getBoolean(MESSAGE_KEY)
 //        if(message!!) {
@@ -85,7 +78,6 @@ class MyService : Service() {
     fun musicRestart(){
         playsong(now_song, pauseposition)
         Log.d("test", "music start")
-        Log.d("test", "$pauseposition")
 
     }
 
@@ -93,7 +85,6 @@ class MyService : Service() {
         mMediaPlayer?.pause()
         pauseposition = mMediaPlayer!!.currentPosition
         Log.d("test", "music pause")
-        Log.d("test", "$pauseposition")
 
     }
 
@@ -119,10 +110,8 @@ class MyService : Service() {
         }
         mMediaPlayer?.seekTo(pauseposition)
         mMediaPlayer?.start()
-
         mMediaPlayer?.setOnCompletionListener { musicNext() }
     }
-
 
     override fun onDestroy() {  //서비스 종료
         super.onDestroy()
@@ -131,6 +120,4 @@ class MyService : Service() {
 
         Log.d("test", "service destroy")
     }
-
-
 }

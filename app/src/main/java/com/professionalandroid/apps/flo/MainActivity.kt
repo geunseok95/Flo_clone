@@ -5,25 +5,26 @@ import android.media.AudioManager
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+    import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+    class MainActivity : AppCompatActivity() {
 
-    companion object{
-        var MESSAGE_KEY:String = "TRUE"
-        const val TAG_LIST_FRAGMENT = "TAG_LIST_FRAGMENT"
-    }
+        companion object{
+            var MESSAGE_KEY:String = "TRUE"
+            const val TAG_LIST_FRAGMENT = "TAG_LIST_FRAGMENT"
+        }
 
-    lateinit var myService: MyService
-    private var mBound: Boolean = false
-    private var isPlaying:Boolean = false
-    private var saved_play_music = 0.toString()
-    private var saved_play_music_int = 0
+        lateinit var myService: MyService
+        private var mBound: Boolean = false
+        private var isPlaying:Boolean = false
+        private var saved_play_music = 0.toString()
+        private var saved_play_music_int = 0
 
 
-    // Bind Service 설정
+        // Bind Service 설정
     private val connection = object : ServiceConnection{
         override fun onServiceDisconnected(p0: ComponentName?) {
             mBound = false
@@ -115,6 +116,30 @@ class MainActivity : AppCompatActivity() {
         Log.d("test", saved_play_music)
         Log.d("test", "$saved_play_music_int")
 
+
+        // 플레이리스트 프레그먼트 이동
+        val musicmanager = supportFragmentManager
+        val musicplaylist = Music_PlayList()
+        playlist.setOnClickListener {
+            Log.d("test", "playlist")
+            musicmanager.beginTransaction().addToBackStack("list")
+            musicmanager.beginTransaction().replace(R.id.main_layout, musicplaylist).commitAllowingStateLoss()
+
+
+
+
+//            val stackCount = musicmanager.backStackEntryCount
+//
+//            for(i in stackCount -1  downTo (0)){
+//                if(!musicmanager.getBackStackEntryAt(i).name.equals("list")){
+//                    musicmanager.popBackStack()
+//                }
+//                else    break
+//            }
+        }
+
+
+
         // 플레이버튼.
         Log.d("test", "create")
 
@@ -167,8 +192,6 @@ class MainActivity : AppCompatActivity() {
             now_singer.text = myService.artistlist[myService.now_song]
             //스레드 유지
             isPlaying = true
-            Log.d("test", "music ${myService.musiclist[myService.now_song]}")
-
         }
 
         // 이전 곡
@@ -181,6 +204,8 @@ class MainActivity : AppCompatActivity() {
             //스레드 유지
             isPlaying = true
         }
+
+
         Log.d("test", "resume")
     }
 
@@ -218,6 +243,15 @@ class MainActivity : AppCompatActivity() {
         Log.d("test", "restart")
     }
 
+
+    fun closeFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.remove(fragment)
+        transaction.commit()
+
+        val manager = supportFragmentManager
+        manager.popBackStack()
+    }
 
     // 권한 획득 확인
 //    override fun onRequestPermissionsResult(
