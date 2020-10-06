@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 
@@ -43,5 +44,26 @@ class RecyclerAdapter(private var items: MutableList<list_item_data>):
         override fun toString(): String {
             return super.toString() + " '" + title!!.text +" " + artist!!.text  + "'"
         }
+    }
+
+
+    // List 변경 처리
+    class ContentDiffUtil(private val oldList: MutableList<list_item_data>, private val currentList: MutableList<list_item_data>) : DiffUtil.Callback(){
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].title == currentList[newItemPosition].title
+        }
+
+        override fun getOldListSize(): Int {
+            return oldList.size
+        }
+
+        override fun getNewListSize(): Int {
+            return currentList.size
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == currentList[newItemPosition]
+        }
+
     }
 }

@@ -10,18 +10,18 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-    class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-        companion object{
-            var MESSAGE_KEY:String = "TRUE"
-            const val TAG_LIST_FRAGMENT = "TAG_LIST_FRAGMENT"
-        }
+    companion object{
+        var MESSAGE_KEY:String = "TRUE"
+        const val TAG_LIST_FRAGMENT = "TAG_LIST_FRAGMENT"
+    }
 
-        lateinit var myService: MyService
-        private var mBound: Boolean = false
-        private var isPlaying:Boolean = false
-        private var saved_play_music = 0.toString()
-        private var saved_play_music_int = 0
+    lateinit var myService: MyService
+    private var mBound: Boolean = false
+    private var isPlaying:Boolean = false
+    private var saved_play_music = 0.toString()
+    private var saved_play_music_int = 0
 
 
         // Bind Service 설정
@@ -118,12 +118,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
         // 플레이리스트 프레그먼트 이동
-        val musicmanager = supportFragmentManager
         val musicplaylist = Music_PlayList()
         playlist.setOnClickListener {
             // stack에 music_list 추가
-            musicmanager.beginTransaction().addToBackStack("music_list")
-            musicmanager.beginTransaction().replace(R.id.main_layout, musicplaylist).commitAllowingStateLoss()
+            val musicmanager = supportFragmentManager.beginTransaction()
+            musicmanager.add(R.id.main_layout, musicplaylist)
+            musicmanager.addToBackStack("music_list")
+            musicmanager.commit()
 
 
 
@@ -242,7 +243,7 @@ import kotlinx.android.synthetic.main.activity_main.*
     }
 
     // fragment에서 activity로 복귀
-    fun closeFragment(fragment: Fragment){
+    fun closeFragment(fragment : Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(fragment)
         transaction.commit()
@@ -251,6 +252,16 @@ import kotlinx.android.synthetic.main.activity_main.*
         //stack에서 제거
         manager.popBackStack()
     }
+
+    fun addFragment(fragment: Fragment){
+        val fm = supportFragmentManager.beginTransaction()
+        fm.add(R.id.main_layout, fragment)
+        fm.addToBackStack("update")
+        fm.commit()
+
+    }
+
+
 
     // 권한 획득 확인
 //    override fun onRequestPermissionsResult(
