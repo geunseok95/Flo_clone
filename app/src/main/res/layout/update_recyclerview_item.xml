@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,44 +9,51 @@
     android:padding="10dp"
     android:weightSum="10">
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:button="@drawable/custom_checkbox"/>
-
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/recycler_view_image"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="2"
-        android:src="@drawable/thestray"
-        app:riv_corner_radius="10dp"
-        android:layout_gravity="center"/>
-
     <LinearLayout
+        android:id="@+id/update_recyclerview_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="5dp"
-        android:layout_gravity="center"
-        android:layout_weight="6">
-        <TextView
-            android:id="@+id/recycler_view_title"
+        android:layout_weight="9"
+        android:weightSum="9">
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:button="@drawable/custom_checkbox"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/recycler_view_image"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="2"
+            android:src="@drawable/thestray"
+            app:riv_corner_radius="10dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="너, 너 (Piano Ver.)"
-            android:textColor="#ffffff"/>
+            android:orientation="vertical"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
+            android:layout_weight="6">
+            <TextView
+                android:id="@+id/recycler_view_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="너, 너 (Piano Ver.)"
+                android:textColor="#ffffff"/>
 
-        <TextView
-            android:id="@+id/recycler_view_artist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="스트레이 (The Stray)"
-            android:textColor="#80ffffff"/>
+            <TextView
+                android:id="@+id/recycler_view_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="스트레이 (The Stray)"
+                android:textColor="#80ffffff"/>
 
+        </LinearLayout>
     </LinearLayout>
 
     <ImageView
