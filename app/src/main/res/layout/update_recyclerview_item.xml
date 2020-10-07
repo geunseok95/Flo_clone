@@ -11,9 +11,9 @@
 
     <LinearLayout
         android:id="@+id/update_recyclerview_item"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_weight="9"
+        android:orientation="horizontal"
         android:weightSum="9">
         <CheckBox
             android:id="@+id/checkBox"
@@ -53,14 +53,14 @@
                 android:text="스트레이 (The Stray)"
                 android:textColor="#80ffffff"/>
 
-        </LinearLayout>
+        </LinearLayout>jk
     </LinearLayout>
 
     <ImageView
-        android:layout_width="0dp"
+        android:id="@+id/move_btn"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_menu_24"
-        android:layout_weight="1"
         android:layout_gravity="center"/>
 
 </LinearLayout>

@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 //        model.textValue.observe(this, testObserver)
 
-        // fragment 연결
+        // viewpager fragment 연결
         var mslideviewpager:SlideViewPager? = null
         val fm = supportFragmentManager
 

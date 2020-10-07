@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-import kotlinx.android.synthetic.main.slide_view_pager_fragment.*
-
 
 class SlideViewPager : Fragment() {
 
@@ -40,7 +37,7 @@ class SlideViewPager : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.slide_view_pager_fragment,container,false)
-        mViewPager = view!!.findViewById(R.id.fragment_viewpager)
+        mViewPager = view.findViewById(R.id.fragment_viewpager)
         mViewPager.adapter = adapter
         mdots_indicator = view.findViewById(R.id.dots_indicator)
         mdots_indicator.setViewPager(mViewPager)

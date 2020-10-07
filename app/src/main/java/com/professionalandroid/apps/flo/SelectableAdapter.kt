@@ -1,24 +1,31 @@
 package com.professionalandroid.apps.flo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.util.containsValue
+import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
-import kotlinx.android.synthetic.main.fragment_update_music__play_list.*
-import kotlinx.android.synthetic.main.fragment_update_music__play_list.view.*
 import kotlinx.android.synthetic.main.update_recyclerview_item.view.*
+import java.util.*
 
 class SelectableAdapter(private var items: MutableList<list_item_data>):
-    RecyclerView.Adapter<SelectableAdapter.ViewHolder>() {
+    RecyclerView.Adapter<SelectableAdapter.ViewHolder>(), PlayListItemTouchHelperCallback.OnItemMoveListener {
 
     interface OnListItemSelelctedInterface{
         fun onItemSelected(v: View, position: Int)
+    }
+
+    interface OnStartDragListener{
+        fun onStartDrag(viewholder: ViewHolder)
     }
 
     // position 별 선택상태를 저장
@@ -27,12 +34,14 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
     var mContext: Context? = null
     // listener
     private var mListener: OnListItemSelelctedInterface? = null
+    private var mStartDragListener: OnStartDragListener? = null
     var musiclist: MutableList<list_item_data>? = null
 
-    constructor(context: Context, listener: OnListItemSelelctedInterface, musiclist: MutableList<list_item_data>) : this(musiclist) {
+    constructor(context: Context, listener: OnListItemSelelctedInterface, listener2: OnStartDragListener, musiclist: MutableList<list_item_data>) : this(musiclist) {
         this.mContext = context
         this.mListener = listener
         this.musiclist = musiclist
+        this.mStartDragListener = listener2
     }
 
     fun setData(mmusiclist: MutableList<list_item_data>){
@@ -52,11 +61,13 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
         var image: RoundedImageView? = null
         var title: TextView? = null
         var artist: TextView? = null
+        var move_btn: ImageView? = null
         init {
             parentview = view.update_recyclerview_item
             image = view.recycler_view_image
             title = view.recycler_view_title
             artist = view.recycler_view_artist
+            move_btn = view.move_btn
             parentview.setOnClickListener{
                 val position = adapterPosition
                 toggleItemSelectied(position)
@@ -77,6 +88,7 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
         return items.size
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.image!!.setImageResource(items[position].image)
         holder.title!!.text = items[position].title
@@ -84,6 +96,12 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
 
         holder.parentview.checkBox.isChecked = isItemSelected(position)
 
+        holder.move_btn?.setOnTouchListener { view, motionEvent ->
+            if(MotionEventCompat.getActionMasked(motionEvent) == MotionEvent.ACTION_DOWN){
+                mStartDragListener?.onStartDrag(holder)
+            }
+            return@setOnTouchListener false
+        }
 
     }
 
@@ -130,6 +148,11 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
         }
         Log.d("test", "false")
         return false
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        Collections.swap(items, fromPosition, toPosition)
+        notifyItemMoved(fromPosition, toPosition)
     }
 
 }
