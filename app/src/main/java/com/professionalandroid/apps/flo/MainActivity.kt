@@ -122,10 +122,10 @@ class MainActivity : AppCompatActivity() {
         playlist.setOnClickListener {
             // stack에 music_list 추가
             val musicmanager = supportFragmentManager.beginTransaction()
+            musicmanager.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
             musicmanager.add(R.id.main_layout, musicplaylist)
             musicmanager.addToBackStack("music_list")
             musicmanager.commit()
-
 
 
 
@@ -159,6 +159,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        val minirecyclerview = DailyRecommendFragment()
+        first_image.setOnClickListener {
+            Log.d("test", "click")
+            val fm = supportFragmentManager.beginTransaction()
+            fm.add(R.id.main_framelayout, minirecyclerview)
+            fm.addToBackStack("update")
+            fm.commit()
+        }
+
 
         // 동기...?
 //        myService.now_song = saved_play_music_int
@@ -258,7 +267,6 @@ class MainActivity : AppCompatActivity() {
         fm.add(R.id.main_layout, fragment)
         fm.addToBackStack("update")
         fm.commit()
-
     }
 
 

@@ -4,11 +4,11 @@
     android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="#000000"
+    android:background="#ffffff"
     android:padding="10dp">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/recycler_view_image"
+        android:id="@+id/mini_recycler_view_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/thestray"
@@ -23,18 +23,18 @@
         android:layout_marginStart="5dp"
         android:layout_gravity="center">
         <TextView
-            android:id="@+id/recycler_view_title"
+            android:id="@+id/mini_recycler_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="너, 너 (Piano Ver.)"
-            android:textColor="#ffffff"/>
+            android:textColor="#000000"/>
 
         <TextView
-            android:id="@+id/recycler_view_artist"
+            android:id="@+id/mini_recycler_view_artist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="스트레이 (The Stray)"
-            android:textColor="#80ffffff"/>
+            android:textColor="#80000000"/>
 
     </LinearLayout>
 
@@ -42,11 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_baseline_play_arrow_black_24"/>
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_baseline_more_vert_24"
+        android:src="@drawable/ic_baseline_more_vert_black_24"
         android:layout_gravity="center_vertical"/>
 
 </LinearLayout>

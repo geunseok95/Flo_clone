@@ -47,9 +47,7 @@ class UpdateMusic_PlayList : Fragment(), SelectableAdapter.OnListItemSelelctedIn
         // 확인 버튼
         val confirm_btn = view.findViewById<TextView>(R.id.confirm_btn)
         confirm_btn.setOnClickListener {
-            val fm = (activity as MainActivity).supportFragmentManager
-            (activity as MainActivity).supportFragmentManager.beginTransaction().remove(this).commit()
-            fm.popBackStack()
+            confirm()
         }
 
         val update_selectall_btn = view.update_selectAll_btn
@@ -60,6 +58,13 @@ class UpdateMusic_PlayList : Fragment(), SelectableAdapter.OnListItemSelelctedIn
             else{
                 mRecyclerAdapter.clearSelectedItem()
             }
+        }
+
+        val delete_btn = view.delete_btn
+
+        delete_btn.setOnClickListener {
+            mRecyclerAdapter.deletecheckedItem()
+            confirm()
         }
         return view
     }
@@ -80,5 +85,17 @@ class UpdateMusic_PlayList : Fragment(), SelectableAdapter.OnListItemSelelctedIn
         mItemTouchHelper.startDrag(viewholder)
     }
 
+    fun confirm(){
+        mRecyclerAdapter.mSelectedItems.clear()
+        for(i in musiclist.indices){
+            musiclist[i].check = false
+        }
+        val musicplaylist = Music_PlayList()
+        val fm = (activity as MainActivity).supportFragmentManager
+        fm.beginTransaction().remove(this)
+        fm.popBackStack()
+        fm.popBackStack()
+        (activity as MainActivity).addFragment(musicplaylist)
+    }
 
 }

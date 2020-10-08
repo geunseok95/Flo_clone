@@ -32,6 +32,8 @@ class Music_PlayList : Fragment() {
         val view = inflater.inflate(R.layout.fragment_music__play_list, container, false)
         mRecyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
 
+        mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerView.adapter = mRecyclerAdapter
         val back_btn = view.findViewById<ImageView>(R.id.back_btn)
         val update_btn = view.findViewById<TextView>(R.id.update_btn)
         back_btn.setOnClickListener {
@@ -51,8 +53,7 @@ class Music_PlayList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val context = view.context
-        mRecyclerView.layoutManager = LinearLayoutManager(context)
-        mRecyclerView.adapter = mRecyclerAdapter
+
         mRecyclerAdapter.notifyDataSetChanged()
 
     }

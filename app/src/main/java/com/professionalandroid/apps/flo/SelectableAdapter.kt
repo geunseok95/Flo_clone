@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 import kotlinx.android.synthetic.main.update_recyclerview_item.view.*
 import java.util.*
+import kotlin.math.sign
 
 class SelectableAdapter(private var items: MutableList<list_item_data>):
     RecyclerView.Adapter<SelectableAdapter.ViewHolder>(), PlayListItemTouchHelperCallback.OnItemMoveListener {
@@ -29,11 +30,12 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
     }
 
     // position 별 선택상태를 저장
-    private val mSelectedItems: SparseBooleanArray = SparseBooleanArray(0)
+    val mSelectedItems: SparseBooleanArray = SparseBooleanArray(0)
 
     var mContext: Context? = null
     // listener
     private var mListener: OnListItemSelelctedInterface? = null
+    // listener2
     private var mStartDragListener: OnStartDragListener? = null
     var musiclist: MutableList<list_item_data>? = null
 
@@ -62,6 +64,7 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
         var title: TextView? = null
         var artist: TextView? = null
         var move_btn: ImageView? = null
+        var check:Boolean? = null
         init {
             parentview = view.update_recyclerview_item
             image = view.recycler_view_image
@@ -71,10 +74,9 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
             parentview.setOnClickListener{
                 val position = adapterPosition
                 toggleItemSelectied(position)
-
+                items[adapterPosition].check = !items[adapterPosition].check
                 // 리스너 실행
                 mListener?.onItemSelected(view, adapterPosition)
-
                 // 클릭시 변화
             }
         }
@@ -93,7 +95,6 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
         holder.image!!.setImageResource(items[position].image)
         holder.title!!.text = items[position].title
         holder.artist!!.text = items[position].artist
-
         holder.parentview.checkBox.isChecked = isItemSelected(position)
 
         holder.move_btn?.setOnTouchListener { view, motionEvent ->
@@ -107,12 +108,10 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
 
     fun toggleItemSelectied(position:Int){
         if(mSelectedItems[position, false]){
-            Log.d("test", "put")
             mSelectedItems.delete(position)
         }
         else{
             mSelectedItems.put(position, true)
-            Log.d("test", "put")
         }
         notifyItemChanged(position)
     }
@@ -142,17 +141,24 @@ class SelectableAdapter(private var items: MutableList<list_item_data>):
     fun checkItemSelected():Boolean{
         for(i in 0 until mSelectedItems.size()) {
             if (mSelectedItems.valueAt(i)) {
-                Log.d("test", "true")
                 return true
             }
         }
-        Log.d("test", "false")
         return false
     }
 
+    // PlayListItemTouchHelperCallback.OnItemMoveListener override
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         Collections.swap(items, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
     }
 
+    fun deletecheckedItem(){
+        var i = 0
+        while(i < items.size){
+            if(items[i].check) items.removeAt(i)
+            else i++
+        }
+        notifyDataSetChanged()
+    }
 }
